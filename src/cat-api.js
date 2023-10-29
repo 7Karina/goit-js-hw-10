@@ -1,5 +1,5 @@
 const API_KEY =
-  'live_yhKx5EW7r5s5EKWButootd2z8zjtwxwBhL2KtG8Vaujfjusynd9eugh1xm5dCi7E';
+  'live_tkio0zSdSrwSD8tb5cTwddvDhv2flWP7F7ew5OIzg3SfITNrlW6tCiDFsOmgko0Y';
 
 function fetchBreeds() {
   const BASE_URL = 'https://api.thecatapi.com/v1';
@@ -7,13 +7,28 @@ function fetchBreeds() {
   const params = new URLSearchParams({
     api_key: API_KEY,
   });
+
+  return fetch(`${BASE_URL}${END_POINT}?${params}`).then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to fetch breeds');
+    }
+    return response.json();
+  });
 }
 
-return fetch(`${BASE_URL}${END_POINT}?${API_KEY}`).then(response => {
-  if (!response.ok) {
-    throw new Error('Failed to fetch breeds');
-  }
-  return response.json();
-});
+function fetchCatByBreed(breedId) {
+  const BASE_URL = 'https://api.thecatapi.com/v1';
+  const END_POINT = '/images/search';
+  const params = new URLSearchParams({
+    breed_ids: breedId,
+    api_key: API_KEY,
+  });
+  return fetch(`${BASE_URL}${END_POINT}?${params}`).then(resp => {
+    if (!resp.ok) {
+      throw new Error(resp.statusText || 'Помилка');
+    }
+    return resp.json();
+  });
+}
 
-export { fetchBreeds };
+export { fetchBreeds, fetchCatByBreed };
