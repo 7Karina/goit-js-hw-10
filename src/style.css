@@ -12,8 +12,8 @@
 
 img {
   display: block;
-  width: 176px;
-  height: 540px;
+  max-width: 100%;
+  height: auto;
 }
 
 body {
@@ -40,7 +40,7 @@ span.text {
 }
 
 .cat-info-img {
-  width: 600px;
+  width: 100%;
   align-items: flex-start;
   object-fit: scale-down;
 }
